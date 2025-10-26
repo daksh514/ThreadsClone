@@ -3,9 +3,8 @@ import { Text, View } from "react-native";
 
 export default function App() {
   return (
-    <View>
-      <Text className="text-red-500 text-2xl font-bold">Feed</Text>
-      <StatusBar style="auto" />
+    <View className="flex-1 p-4">
+      <Text className="text-white text-3xl font-bold">Hello World</Text>
     </View>
   );
 }
