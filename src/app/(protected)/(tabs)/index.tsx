@@ -14,9 +14,17 @@ export default function App() {
       //   </View>
       // }
       ListHeaderComponent={
-        <Link href="/new" className="text-blue-500 p-4 text-center text-3xl ">
-          New Posts
-        </Link>
+        <>
+          <Link href="/new" className="text-blue-500 p-4 text-center text-3xl ">
+            New Posts
+          </Link>
+          <Link
+            href="/login"
+            className="text-blue-500 p-4 text-center text-3xl "
+          >
+            Login
+          </Link>
+        </>
       }
     />
   );
