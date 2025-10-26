@@ -2,8 +2,9 @@ import { View, Text, TextInput, Pressable, Alert } from "react-native";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-// import { supabase } from "../../lib/supabase";
+
 import { useRouter } from "expo-router";
+import { supabase } from "@/lib/supabase";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -29,23 +30,22 @@ const Signup = () => {
     }
 
     setLoading(true);
-    // try {
-    //   const { error } = await supabase.auth.signUp({
-    //     email,
-    //     password,
-    //   });
-
-    //   if (error) {
-    //     Alert.alert("Error", error.message);
-    //   } else {
-    //     Alert.alert("Success", "Check your email to verify your account!");
-    //     router.replace("/(auth)/login");
-    //   }
-    // } catch (error) {
-    //   Alert.alert("Error", "An unexpected error occurred");
-    // } finally {
-    //   setLoading(false);
-    // }
+    try {
+      const {
+        data: { session },
+        error,
+      } = await supabase.auth.signUp({
+        email: email,
+        password: password,
+      });
+      if (error) Alert.alert(error.message);
+      if (!session)
+        Alert.alert("Please check your inbox for email verification!");
+    } catch (error) {
+      Alert.alert("Error", "An unexpected error occurred");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

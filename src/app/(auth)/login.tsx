@@ -2,7 +2,6 @@ import { View, Text, TextInput, Pressable, Alert } from "react-native";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-// import { supabase } from "../../lib/supabase";
 
 import { useRouter } from "expo-router";
 import { supabase } from "@/lib/supabase";
@@ -20,22 +19,20 @@ const Login = () => {
     }
 
     setLoading(true);
-    // try {
-    //   const { error } = await supabase.auth.signInWithPassword({
-    //     email,
-    //     password,
-    //   });
+    try {
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
 
-    //   if (error) {
-    //     Alert.alert("Error", error.message);
-    //   } else {
-    //     router.replace("/(protected)/(tabs)");
-    //   }
-    // } catch (error) {
-    //   Alert.alert("Error", "An unexpected error occurred");
-    // } finally {
-    //   setLoading(false);
-    // }
+      if (error) {
+        Alert.alert("Error", error.message);
+      }
+    } catch (error) {
+      Alert.alert("Error", "An unexpected error occurred");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
